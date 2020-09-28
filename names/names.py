@@ -16,6 +16,9 @@ duplicates = []  # Return the list of duplicates in this data structure
 '''
 # original implementation
 # this took about 11.64 seconds to run locally
+# the runtime complexity is O(n^2) 
+# it has to loop through names_2 for each in names_1
+# in this case that is !0,000 * 10,000
 for name_1 in names_1:
     for name_2 in names_2:
         if name_1 == name_2:
