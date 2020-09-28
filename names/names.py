@@ -13,11 +13,60 @@ f.close()
 duplicates = []  # Return the list of duplicates in this data structure
 
 # Replace the nested for loops below with your improvements
+'''
+# original implementation
+# this took about 11.64 seconds to run locally
 for name_1 in names_1:
     for name_2 in names_2:
         if name_1 == name_2:
             duplicates.append(name_1)
+'''  
+      
+# took about .20 seconds to run locally
+class BSTNode:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
 
+    # Insert the given value into the tree
+    def insert(self, value):        
+        if value < self.value: # if new value is less than current node
+            if self.left == None:
+                self.left = BSTNode(value)
+            else:
+                self.left.insert(value)
+        else: # if new value is greater than or equal to current node
+            if self.right == None:
+                self.right = BSTNode(value)
+            else:
+                self.right.insert(value)
+
+    def contains(self, target):
+        if self.value == target:
+            return True
+        if target < self.value:
+            if self.left == None:
+                return False
+            else:
+                return self.left.contains(target)
+        else:
+            if self.right == None:
+                return False    
+            else:   
+                return self.right.contains(target)
+
+name_tree = BSTNode(names_1[0])
+for name in names_1[1:]:
+    name_tree.insert(name)
+
+duplicates = [name for name in names_2 if name_tree.contains(name)]
+
+'''
+# stretch using only lists
+# took about 2.61 seconds to run locally
+duplicates = [name for name in names_1 if name in names_2]
+'''
 end_time = time.time()
 print (f"{len(duplicates)} duplicates:\n\n{', '.join(duplicates)}\n\n")
 print (f"runtime: {end_time - start_time} seconds")
