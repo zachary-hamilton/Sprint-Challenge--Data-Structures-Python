@@ -39,4 +39,22 @@ class LinkedList:
         return False
 
     def reverse_list(self, node, prev):
-        pass
+        # empty list and one element list
+        if self.head == None or self.head.get_next() == None:
+            pass
+        else: # for multiple element lists
+            # creating a new list starting with the head
+            currently_working_on = self.head
+            next_to_work_on = self.head.get_next()
+            self.head = Node(currently_working_on.get_value()) # cant just add to head becasue that would retain the old list still
+            currently_working_on = next_to_work_on
+            # looping through the rest of the list
+            while currently_working_on != None:
+                next_to_work_on = currently_working_on.get_next()
+                self.add_to_head(currently_working_on.get_value())
+                currently_working_on = next_to_work_on
+            
+
+        # multiple element list
+        
+            
